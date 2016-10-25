@@ -5,6 +5,8 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UsuarioType extends AbstractType
 {
@@ -14,12 +16,18 @@ class UsuarioType extends AbstractType
         ->add('nombre')
         ->add('apellidos')
         ->add('email')
-        ->add('password')
+        ->add('password', RepeatedType::class, array( 
+              'type' => PasswordType::class,
+              'invalid_message' => 'Las dos contraseñas deben coincidir', 
+              'first_options'	=> array('label' => 'Contraseña'), 
+              'second_options'	=> array('label' => 'Repite Contraseña'),
+              ))
         ->add('direccion')
-        ->add('permiteEmail')
-        ->add('fechaNacimiento')
+        ->add('permiteEmail','checkbox', array( 
+                'required' => false))
+        ->add('fechaNacimiento','birthday')
         ->add('dni')
-        ->add('numero_tarjeta')
+        ->add('numeroTarjeta')
         ->add('ciudad')
         ->add('registrarme', 'submit')
         ;

@@ -69,7 +69,13 @@ class UsuarioController extends Controller
     public function registroAction(Request $request)
     {
         $usuario = new Usuario();
-        $formulario = $this->createForm('AppBundle\Form\UsuarioType');
+        $usuario->setPermiteEmail(true);
+        $usuario->setNombre("escribe tu nombre aquí");
+        $formulario = $this->createForm('AppBundle\Form\UsuarioType',$usuario);
+        $formulario->handleRequest($request);
+        if ($formulario->isValid()){
+            echo(" es valido");
+        } 
         return $this->render('usuario/registro.html.twig', array(
                               'usuario'=>$usuario,
                               'formulario'=>$formulario->createView()
