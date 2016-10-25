@@ -4,6 +4,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Ciudad;
+use AppBundle\Entity\Usuario;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,7 +67,12 @@ class UsuarioController extends Controller
     * @Route("/registro", name="usuario_registro")
     */
     public function registroAction(Request $request)
-    {        
-        return $this->render('usuario/registro.html.twig');
+    {
+        $usuario = new Usuario();
+        $formulario = $this->createForm('AppBundle\Form\UsuarioType');
+        return $this->render('usuario/registro.html.twig', array(
+                              'usuario'=>$usuario,
+                              'formulario'=>$formulario->createView()
+                        ));
     }
 }
