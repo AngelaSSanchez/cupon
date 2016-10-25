@@ -1,0 +1,23 @@
+security:
+    firewalls:
+        frontend:
+            pattern: ^/* 
+            provider: usuarios 
+            anonymous: ~ 
+            form_login:
+                login_path: usuario_login 
+                check_path: usuario_login_check
+            logout:
+                path: usuario_logout
+                
+    access_control:
+        - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/usuario/registro, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/usuario/*, roles: ROLE_USUARIO }
+        
+    providers:
+        usuarios:
+            entity: { class: AppBundle\Entity\Usuario, property: email }
+            
+    encoders:
+        AppBundle\Entity\Usuario: plaintext
