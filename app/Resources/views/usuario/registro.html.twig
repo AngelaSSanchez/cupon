@@ -1,7 +1,7 @@
 {% extends 'frontend.html.twig' %}
 
 {% block id 'usuario' %}
-{% block title 'RegÃ­strate gratis como usuario' %}
+{% block title 'Regístrate gratis como usuario' %}
 
 {% block article %}
     <h1>{{ block('title') }}</h1>
@@ -9,42 +9,44 @@
     <div>
         {{ form_start(formulario) }}
         {{ form_errors(formulario) }}
+        <div>
+            <fieldset>
+                <legend><h3>Datos personales</h3></legend>
 
-        <fieldset>
-            <legend>Datos personales</legend>
-            
-            {{ form_row(formulario.nombre) }}
-            {{ form_row(formulario.apellidos) }}
-            {{ form_row(formulario.fechaNacimiento) }}
-            {{ form_row(formulario.dni) }}
-            
-            {{ form_label(formulario.direccion, 'DirecciÃ³n postal') }}
-            {{ form_widget(formulario.direccion)}}
-            
-        </fieldset>
+                {{ form_row(formulario.nombre) }}
+                {{ form_row(formulario.apellidos) }}
+                {{ form_row(formulario.fechaNacimiento) }}
+                {{ form_row(formulario.dni) }}
 
-        <fieldset>
-            <legend>Datos de acceso</legend>
+                {{ form_label(formulario.direccion, 'Dirección postal') }}
+                {{ form_widget(formulario.direccion)}}
 
-            {{ form_row(formulario.email) }}
-            {{ form_row(formulario.password) }}
-        </fieldset>
+            </fieldset>
+        </div>
+        <div>    
+            <fieldset>
+                <legend><h3>Datos de acceso</h3></legend>
 
-        <fieldset>
-            <legend>Datos econÃ³micos</legend>
+                {{ form_row(formulario.email) }}
+                {{ form_row(formulario.password) }}
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend><h3>Datos económicos</h3></legend>
 
-            {{ form_row(formulario.numeroTarjeta) }}
-            {{ form_row(formulario.ciudad) }}
-        </fieldset>
+                {{ form_row(formulario.numeroTarjeta) }}
+                {{ form_row(formulario.ciudad) }}
+            </fieldset>
+        </div>
 
-
-
-        <fieldset>
-            {{ form_errors(formulario.permiteEmail) }}
-            {{ form_widget(formulario.permiteEmail) }}
-            <span>Me gustarÃ­a recibir el boletÃ­n de ofertas de Cupon</span>
-       </fieldset>
-
+        <div>
+            <fieldset>
+                {{ form_errors(formulario.permiteEmail) }}
+                {{ form_widget(formulario.permiteEmail) }}
+                <span>Me gustaría recibir el boletín de ofertas de Cupon</span>
+           </fieldset>
+        </div>     
     </div>
     {{ form_end(formulario) }}
 {% endblock %}

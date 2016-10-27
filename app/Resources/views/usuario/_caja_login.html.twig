@@ -1,10 +1,15 @@
+{% for mensaje in app.session.flashbag.get('info') %}
+    <p class="info">{{ mensaje }}</p>
+{% endfor %}
+
 {# el usuario está logueado #}
 {% if is_granted('ROLE_USUARIO') %}
     <p>Conectado como {{ app.user }}</p>
 
-    <a href="#">Ver mi perfil</a>
+    <a href="{{ path('usuario_perfil') }}">Ver mi perfil</a>
     <a href="{{ path('usuario_logout') }}">Cerrar sesión</a>
-    {# el usuario todavía no ha hecho login #}
+
+    {# el usuario todavÃ­a no ha hecho login #}
 {% else %}
 
     <a class="boton" href="{{path('usuario_registro')}}">Regístratre</a>
@@ -25,5 +30,5 @@
         </div>
         <input type="submit" value="Entrar" />
     </form>
-            
+
 {% endif %}
