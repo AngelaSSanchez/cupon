@@ -62,7 +62,9 @@ class CiudadController extends Controller
         
         $ofertas = $em->getRepository('AppBundle:Oferta')->findRecientes($ciudad->getId());
 
-        return $this->render('ciudad/recientes.html.twig', array(
+        $formato = $request->getRequestFormat();
+
+        return $this->render('ciudad/recientes.'.$formato.'.twig', array(
             'ciudad' => $ciudad,
             'cercanas' => $cercanas,
             'ofertas' => $ofertas

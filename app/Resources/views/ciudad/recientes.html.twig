@@ -3,6 +3,13 @@
 {% block id 'recientes' %}
 {% block title %}Ofertas recientes en {{ ciudad.nombre }}{% endblock %}
 
+{% block rss %}    
+   <a href="{{ url('ciudad_recientes', { ciudad: ciudad.slug, _format: 'rss' }) }}"
+      type="application/rss+xml">
+      RSS de las ofertas más recientes en {{ ciudad.nombre }}
+   </a>
+{% endblock %}
+
 {% block article %}
     <h1>Ofertas recientes en <strong>{{ ciudad.nombre }}</strong></h1>
 

@@ -42,9 +42,10 @@ class TiendaController extends Controller
                                                             $tienda->getSlug(),
                                                             $tienda->getCiudad()->getSlug()
                                                         );
+        
+        $formato = $request->getRequestFormat();
 
-
-        return $this->render('tienda/portada.html.twig', array(
+        return $this->render('tienda/portada.'.$formato.'.twig', array(
             'tienda' => $tienda,
             'ofertas' => $ofertas,
             'cercanas' => $cercanas,
