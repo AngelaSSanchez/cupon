@@ -52,7 +52,7 @@ class CiudadController extends Controller
      *
      * @throws NotFoundHttpException
      */
-    public function recientesAction($ciudad)
+    public function recientesAction($ciudad, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 

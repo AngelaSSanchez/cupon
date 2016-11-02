@@ -11,9 +11,8 @@ security:
                 path: usuario_logout
                 
     access_control:
-        - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/usuario/registro, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/usuario/*, roles: ROLE_USUARIO }
+        - { path: ^/(es|en)/usuario/(login|registro), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(es|en)/usuario/*, roles: ROLE_USUARIO }
         
     providers:
         usuarios:
