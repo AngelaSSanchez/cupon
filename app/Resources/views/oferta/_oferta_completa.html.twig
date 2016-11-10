@@ -16,7 +16,10 @@
     </section>
     <section class="estado"> 
         <div class="tiempo"> 
-            <strong>La oferta termina: </strong>: {{oferta.fechaExpiracion |cuenta_atras}} 
+           {# <strong>La oferta termina: </strong>: {{oferta.fechaExpiracion |cuenta_atras}}#}
+            {% trans with { '%tiempo%': oferta.fechaExpiracion|cuenta_atras } %}
+                <strong>Faltan</strong>: %tiempo%
+            {% endtrans %}
         </div>
         <div class="compras"> 
             <strong>Compras</strong>: {{oferta.compras}} 
@@ -25,11 +28,15 @@
             {% set faltan = oferta.umbral - oferta.compras  %}
                 {% if faltan > 0  %}
                     {# Si las compras no llegan al umbral mínimo establecido #} 
-                    Faltan <strong>{{ faltan }}</strong> para activar la oferta
+                    {% transchoice faltan with { '%faltan%' : faltan } %}
+                    {1} ¡Una sola compra más activa la oferta!|
+                    [1, 9] Sólo faltan %faltan% compras para activar la oferta!|
+                    ]9,Inf] Faltan %faltan% compras para activar la oferta
+                    {% endtranschoice %}
                 {% else %}
-                    {# Si las compras superan el umbral mínimo establecido #} 
-                    <strong>Oferta activada</strong> 
-                    por superar las <strong>{{ oferta.umbral }}</strong> compras necesarias 
+                    {% trans with { '%compras%': oferta.umbral } %}
+                        <strong>Oferta activada</strong> por superar las <strong>%compras%</strong> compras necesarias
+                    {% endtrans %}
                 {% endif %}
             </div> 
         </section>

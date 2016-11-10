@@ -165,11 +165,13 @@ class DefaultController extends Controller
     /**
      * @Route("/sitio/{nombrePagina}", defaults={ "nombrePagina"="ayuda" }, name="pagina")
      */
-    public function paginaAction($nombrePagina)
+    public function paginaAction($nombrePagina, Request $request)
     {
         
-        return $this->render('sitio/'.$nombrePagina.'.html.twig');
-    }    
+        return $this->render(sprintf('sitio/%s/%s.html.twig',
+                                    $request->getLocale(),
+                                    $nombrePagina));
+    }   
     
     
     /**

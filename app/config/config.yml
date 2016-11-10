@@ -7,6 +7,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.ciudad_por_defecto : 'madrid'
+    locale: es
 
 framework:
     #esi:             ~
@@ -70,3 +71,17 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+    
+easy_admin:
+    entities:
+        - AppBundle\Entity\Ciudad
+        - AppBundle\Entity\Tienda
+        - AppBundle\Entity\Usuario 
+        - AppBundle\Entity\Venta
+        - AppBundle\Entity\Oferta
+        
+    site_name: 'Cupon.' 
+#    design:
+#        brand_color: '#8B00FF'
+#        color_scheme: 'light'
+#    disabled_actions: ['new']        

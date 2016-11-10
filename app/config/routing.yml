@@ -6,3 +6,13 @@ app:
         _locale: "%locale%"
     requirements:
         _locale: es|en
+        
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /easyadmin
+    
+_extranet:
+    resource: '@AppBundle/Controller/ExtranetController.php'
+    type:     annotation
+    prefix:   /extranet    

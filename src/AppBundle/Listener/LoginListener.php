@@ -13,13 +13,15 @@ use Symfony\Component\Routing\Router;
  */
 class LoginListener
 {
+    /** @var AuthorizationChecker */
+    private $checker;
     private $router, $ciudad = null;
 
-    public function  construct(Router $router)
+    public function __construct(AuthorizationChecker $checker, Router $router)
     {
+        $this->checker = $checker;
         $this->router = $router;
     }
-
 
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
