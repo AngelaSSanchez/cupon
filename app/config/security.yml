@@ -1,5 +1,18 @@
-security:
+security:    
     firewalls:
+        backend:
+            pattern: ^/easyadmin 
+            provider: administradores
+            http_basic: ~        
+        extranet:
+            pattern: ^/extranet
+            provider: tiendas
+            anonymous: ~ 
+            form_login:
+                login_path: extranet_login 
+                check_path: extranet_login_check
+            logout:
+                path: extranet_logout   
         frontend:
             pattern: ^/* 
             provider: usuarios 
@@ -13,10 +26,23 @@ security:
     access_control:
         - { path: ^/(es|en)/usuario/(login|registro), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(es|en)/usuario/*, roles: ROLE_USUARIO }
+        - { path: ^/easyadmin/*, roles: ROLE_ADMIN }
+        - { path: ^/extranet/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/extranet/*, roles: ROLE_TIENDA }
         
     providers:
         usuarios:
             entity: { class: AppBundle\Entity\Usuario, property: email }
+        administradores:
+            memory:
+                users:
+                    # usuario = admin, contraseÃ±a = 1234
+                    admin: { password: '$2y$13$w700yeSs8FxMLrEXaCATgehosZf9vx09RbwKddswl9LN/22dKL2qO', roles: ROLE_ADMIN }
+
+        tiendas:
+            entity: {class: AppBundle\Entity\Tienda, property: login}
             
     encoders:
-        AppBundle\Entity\Usuario: plaintext
+        AppBundle\Entity\Usuario: bcrypt
+        Symfony\Component\Security\Core\User\User: {algorithm: bcrypt, cost: 8}
+        AppBundle\Entity\Tienda: bcrypt

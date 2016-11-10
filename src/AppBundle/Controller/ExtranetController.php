@@ -16,7 +16,7 @@ class ExtranetController extends Controller
      * @Route("/",  name="extranet_portada")
      */
     public function portadaAction(){
-    
+        
          return $this->render('extranet.html.twig');
     }
 
@@ -45,11 +45,37 @@ class ExtranetController extends Controller
     /**
      * @Route("/perfil",  name="extranet_perfil")
      */
-    public function perfilAction(){
-    return true;
+    public function perfilAction(){         
+        return true;
     }    
 
+    /**
+     * @Route("/login", name="extranet_login")
+     */    
+    public function loginAction(){
+        $authUtils = $this->get('security.authentication_utils');
+        return $this->render('extranet/login.html.twig', array(
+                              'last_username'=>$authUtils->getLastUsername(),
+                              'error'=>$authUtils->getLastAuthenticationError()
+                        ));    
+    }
     
+    /**
+     * @Route("/login_check", name="extranet_login_check")
+     */    
+    public function loginCheckAction(){
+        $usuario = $this->get('security.token_storage')->getToken()->getUser();
+        return $this->render('extranet/_caja_login.html.twig', array(
+                              'usuario'=>$usuario
+                        ));    
+    }
+    
+    /**
+     * @Route("/logout", name="extranet_logout")
+     */    
+    public function logoutAction(){
+        
+    }    
     
     
     
