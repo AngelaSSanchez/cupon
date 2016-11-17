@@ -5,16 +5,11 @@
 {% block id 'portada' %}
 
 {% block article %}
-   {{ include('oferta/_oferta_completa.html.twig') }}
+{#    {{dump(app)}}#}
+    {{ include('oferta/_oferta_completa.html.twig') }}
 {% endblock %}
 
-{% block aside %}   
-{#    {{ include('usuario/_caja_login.html.twig') }}#}
-    {{ parent() }}
-{#        <aside> ## FORMULARIO DE LOGIN ##
-            <section id="nosotros"> 
-                <h2>Sobre nosotros</h2> 
-                <p>Lorem ipsum dolor sit amet...</p> 
-            </section> 
-        </aside>#}
-{% endblock %}             
+{% block aside %}
+        {{ parent() }}
+{% endblock %}                
+            

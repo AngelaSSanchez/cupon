@@ -6,13 +6,14 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: es
     app.ciudad_por_defecto: 'madrid'
-    app.misidiomas: 'es|en'
-    app.directorio.imagenes: %kernel.root_dir%/../web/uploads/images/
 
 framework:
-    translator:      { fallbacks: ["%locale%"] }
+    default_locale:  '%locale%'
+    translator:      { fallback: es }
+    #esi:             ~
+    #translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -74,24 +75,3 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-easy_admin:
-    entities:
-        - AppBundle\Entity\Ciudad
-        - AppBundle\Entity\Oferta
-        - AppBundle\Entity\Tienda
-        - AppBundle\Entity\Usuario
-        - AppBundle\Entity\Venta
-        
-    site_name: 'Cupon.' 
-    design:
-        brand_color: '#8B00FF'
-        color_scheme: 'light'
-    disabled_actions: ['new']   
-    
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        # enable the SonataAdminBundle block
-        sonata.admin.block.admin_list:
-            contexts: [admin]    

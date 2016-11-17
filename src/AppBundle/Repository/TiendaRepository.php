@@ -7,7 +7,32 @@ use Doctrine\ORM\EntityRepository;
 
 class TiendaRepository extends EntityRepository
 {
+    /**
+     * Encuentra las ofertas más recientes de la tienda indicada.
+     *
+     * @param int $tiendaId El id de la tienda
+     * @param int $limite   Número de ofertas a devolver (por defecto, cinco)
+     *
+     * @return array
+     */
+    public function findOfertasRecientes($tiendaId, $limite = 5)
+    {
+        $em = $this->getEntityManager();
 
+        $consulta = $em->createQuery('
+            SELECT o, t
+            FROM AppBundle:Oferta o 
+            JOIN o.tienda t
+            WHERE o.tienda = :id
+            ORDER BY o.fechaExpiracion DESC
+        ');
+        $consulta->setMaxResults($limite);
+        $consulta->setParameter('id', $tiendaId);
+
+        return $consulta->getResult();
+    }
+    
+    
     /**
      * Encuentra las ofertas más recientemente publicadas por la tienda indicada
      * Las ofertas devueltas, además de publicadas, también han sido revisadas.

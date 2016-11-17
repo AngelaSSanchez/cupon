@@ -151,7 +151,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         // Crear 100 usuarios en cada ciudad
         $numUsuario = 0;
         foreach ($ciudades as $ciudad) {
-            for ($i = 1; $i <= 100; ++$i) {
+            for ($i = 1; $i <= 10; ++$i) {
                 ++$numUsuario;
 
                 $usuario = new Usuario();
@@ -163,7 +163,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
 //                $usuario->setPassword('password'.$numUsuario);
                 
                 $encoder = $this->container->get('security.encoder_factory')->getEncoder($usuario);
-                $passwordEnClaro = 'pass'.$i;
+                $passwordEnClaro = 'pass'.$numUsuario;
                 $password = $encoder->encodePassword($passwordEnClaro, null);
                 $usuario->setPassword($password);
                 

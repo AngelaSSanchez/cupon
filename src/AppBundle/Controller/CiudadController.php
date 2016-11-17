@@ -52,7 +52,7 @@ class CiudadController extends Controller
      *
      * @throws NotFoundHttpException
      */
-    public function recientesAction($ciudad, Request $request)
+    public function recientesAction(Request $request, $ciudad)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -63,7 +63,7 @@ class CiudadController extends Controller
         $ofertas = $em->getRepository('AppBundle:Oferta')->findRecientes($ciudad->getId());
 
         $formato = $request->getRequestFormat();
-
+        
         return $this->render('ciudad/recientes.'.$formato.'.twig', array(
             'ciudad' => $ciudad,
             'cercanas' => $cercanas,

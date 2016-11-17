@@ -7,7 +7,33 @@ use Doctrine\ORM\EntityRepository;
 
 class OfertaRepository extends EntityRepository
 {
+    /**
+     * Encuentra todas las ventas de la oferta indicada.
+     *
+     * @param int $oferta El id de la oferta
+     *
+     * @return array
+     */
+    public function findVentasByOferta($idoferta)
+    {
+        $em = $this->getEntityManager();
 
+        $consulta = $em->createQuery('
+            SELECT v, o, u
+            FROM AppBundle:Venta v 
+            JOIN v.oferta o 
+            JOIN v.usuario u
+            WHERE o.id = :id
+            ORDER BY v.fecha DESC
+        ');
+        $consulta->setParameter('id', $idoferta);
+
+        return $consulta->getResult();
+    }
+    
+    
+    
+    
     public function findOfertaDelDia($ciudad)
     {
         $em = $this->getEntityManager();

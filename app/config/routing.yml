@@ -1,18 +1,27 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
-    prefix:   /{_locale}
+    prefix:	/{_locale} 
     defaults:
-        _locale: "%locale%"
+        _locale: '%locale%'
     requirements:
-        _locale: es|en
-        
+        _locale: '%app.misidiomas%'
+
 easy_admin_bundle:
     resource: "@EasyAdminBundle/Controller/"
     type:     annotation
     prefix:   /easyadmin
     
+admin_area:
+    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
+    prefix: /admin    
+
 _extranet:
     resource: '@AppBundle/Controller/ExtranetController.php'
     type:     annotation
-    prefix:   /extranet    
+    prefix:   /extranet
+    
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin    

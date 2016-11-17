@@ -106,12 +106,11 @@ EOJ;
      */
     public function descuento($precio, $descuento, $decimales = 0)
     {
-        if (!is_numeric($precio) || !is_numeric($descuento)) {
-            return '-';
-        }
-
         if ($descuento === 0 || $descuento === null) {
             return '0%';
+        }
+        if (!is_numeric($precio) || !is_numeric($descuento)) {
+            return '-';
         }
 
         $precio_original = $precio + $descuento;

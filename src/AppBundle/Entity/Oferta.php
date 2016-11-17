@@ -1,13 +1,12 @@
 <?php
 
-
-
 namespace AppBundle\Entity;
 
 use AppBundle\Util\Slugger;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 /**
@@ -435,4 +434,19 @@ class Oferta
 
         return $this->fechaExpiracion > $this->fechaPublicacion;
     }
+    
+    public function subirFoto($directorioDestino)
+    {
+        if (null === $this->foto) {
+            return;
+        }
+
+        //añadir esto como un parametro
+//        $directorioDestino = DIR . '/../../../../web/uploads/images';
+        $nombreArchivoFoto = uniqid('cupon-') . '-foto.jpg';
+
+        $this->foto->move($directorioDestino, $nombreArchivoFoto);
+        $this->setRutaFoto($nombreArchivoFoto);
+    }
+
 }

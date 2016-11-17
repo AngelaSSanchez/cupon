@@ -1,27 +1,20 @@
-{# el usuario está logueado #}
-
-{% for tipo, mensajes in app.session.flashbag.all() %}
-    {% for mensaje in mensajes %}
-        <p class="flash flash-{{ tipo }}">
-            {{ tipo == 'error' ? '<strong>Error</strong> '}}
-            {{ mensaje }}
-        </p>
-    {% endfor %}
+{% for mensaje in app.session.flashbag.get('info') %}
+    <p class="info">{{ mensaje }}</p>
 {% endfor %}
-    
+
+{# el usuario está logueado #}
 {% if is_granted('ROLE_USUARIO') %}
- 
     <p>Conectado como {{ app.user }}</p>
 
     <a href="{{ path('usuario_perfil') }}">Ver mi perfil</a>
-    
     <a href="{{ path('usuario_logout') }}">Cerrar sesión</a>
+
     {# el usuario todavía no ha hecho login #}
 {% else %}
-    
-    <a class="boton" href="{{ path('usuario_registro') }}">Regístrate</a>
-    
+
+    <a class="boton" href="{{path('usuario_registro')}}">Regístrate</a>
     <h2>Accede a tu cuenta</h2>
+
     <form action="{{ path('usuario_login_check') }}" method="post">
         <div>
             <label for="login_user">Email</label>
@@ -37,4 +30,5 @@
         </div>
         <input type="submit" value="Entrar" />
     </form>
+
 {% endif %}

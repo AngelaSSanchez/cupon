@@ -14,6 +14,15 @@ use AppBundle\Entity\Venta;
 
 class DefaultController extends Controller
 {
+    
+//    /**
+//     * @Route("/kkk", name="kkk")
+//     */
+//    public function portadasssAction(){
+//    
+//         return $this->render('extranet.html.twig');
+//    }
+    
 //    /**
 //     * @Route("/", name="homepage")
 //     */
@@ -171,7 +180,7 @@ class DefaultController extends Controller
         return $this->render(sprintf('sitio/%s/%s.html.twig',
                                     $request->getLocale(),
                                     $nombrePagina));
-    }   
+    }    
     
     
     /**
@@ -199,7 +208,7 @@ class DefaultController extends Controller
     }
    
     
- /**
+    /**
      * @Route("/pruebas/{ciudad}", name="pruebas")
      */
     public function pruebasAction($ciudad, Request $request)
@@ -267,14 +276,15 @@ class DefaultController extends Controller
         
 //        Devuelve el formato de la petición en minúsculas
         $format =  $request->getRequestFormat();
-        
-        
-        
-
-        
-        
+  
     } 
     
+    /**
+     * @Route("kkk", name="kkk")
+     */
+    public function portadasAction(){
     
+         return $this->render('extranet.html.twig');
+    }
     
 }

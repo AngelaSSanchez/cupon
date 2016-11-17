@@ -18,15 +18,15 @@
         <nav>
             <ul>
                 <li><a href="{{ path('portada') }}">{{"Oferta del día"|trans}}</a></li>
-                <li><a href="{{ path('ciudad_recientes', { ciudad: ciudadSeleccionada }) }}">Ofertas recientes</a></li>
-                <li><a href="{{ path('usuario_compras') }}">{{"Mis Compras"|trans}}</a></li>
+                <li><a href="{{ path('ciudad_recientes', { ciudad: ciudadSeleccionada }) }}">{{"Ofertas recientes"|trans}}</a></li>
+                <li><a href="{{ path('usuario_compras') }}">{{"Mis Ofertas"|trans}}</a></li>
                 <li>{{ render(controller('AppBundle:Ciudad:listaCiudades', { ciudad: ciudadSeleccionada})) }}</li>
             </ul>
         </nav>
     </header>
-    
+
     {% block rss %}{% endblock %}   
-            
+    
     <article>
     {% block article %}{% endblock %}
     </article>
@@ -34,8 +34,8 @@
     <aside>
         {% block aside %}
             <section id="login">
-                {{ render(controller('AppBundle:Usuario:loginCheck')) }}
-            </section>    
+                {{ render(controller('AppBundle:Usuario:cajaLogin')) }}
+            </section>
         {% endblock %}
     </aside>
 {% endblock %}

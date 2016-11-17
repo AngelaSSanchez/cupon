@@ -28,11 +28,11 @@ class TiendaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $ciudad = $em->getRepository('AppBundle:Ciudad')->findOneBySlug($ciudad);
+//        $ciudad = $em->getRepository('AppBundle:Ciudad')->findOneBySlug($ciudad);
         
         $tienda = $em->getRepository('AppBundle:Tienda')->findOneBy(array(
                                                         'slug' => $tienda,
-                                                        'ciudad' => $ciudad->getId(),
+//                                                        'ciudad' => $ciudad->getId(),
                                                     ));
 
 
@@ -42,7 +42,7 @@ class TiendaController extends Controller
                                                             $tienda->getSlug(),
                                                             $tienda->getCiudad()->getSlug()
                                                         );
-        
+
         $formato = $request->getRequestFormat();
 
         return $this->render('tienda/portada.'.$formato.'.twig', array(

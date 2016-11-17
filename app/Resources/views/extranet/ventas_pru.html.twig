@@ -1,0 +1,13 @@
+{% extends 'extranet.html.twig' %}
+
+{% block id 'portada' %}
+{% block title %}Administración{% endblock %}
+
+{% block article %}
+    <h1>Ofertas más recientes</h1>
+
+        {% for venta in ventas %}
+            {{ dump(venta) }}
+        {% endfor %}
+
+{% endblock %}

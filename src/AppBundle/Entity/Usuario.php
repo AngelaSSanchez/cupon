@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UsuarioRepository")
  * @DoctrineAssert\UniqueEntity("email")
- * @Assert\Callback(callback={"esDniValido"})
+ * @Assert\Callback(callback = { "esDniValido" })
  */
 class Usuario implements UserInterface
 {
@@ -312,7 +312,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * MÃ©todo requerido por la interfaz UserInterface.
+     * Método requerido por la interfaz UserInterface.
      */
     public function getRoles()
     {
@@ -320,7 +320,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * MÃ©todo requerido por la interfaz UserInterface.
+     * Método requerido por la interfaz UserInterface.
      */
     public function getUsername()
     {
@@ -328,7 +328,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * MÃ©todo requerido por la interfaz UserInterface.
+     * Método requerido por la interfaz UserInterface.
      */
     public function eraseCredentials()
     {
@@ -336,30 +336,30 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Este mÃ©todo es requerido por la interfaz UserInterface, pero esta clase
-     * no necesita implementarlo porque se usa 'bcrypt' para codificar las contraseÃ±as.
+     * Este método es requerido por la interfaz UserInterface, pero esta clase
+     * no necesita implementarlo porque se usa 'bcrypt' para codificar las contraseñas.
      */
     public function getSalt()
     {
     }
 
     /**
-     * Validador propio que comprueba si el DNI introducido es vÃ¡lido.
+     * Validador propio que comprueba si el DNI introducido es válido.
      *
-     * El DNI es un identificador Ãºnico obligatorio para todos los ciudadanos de
-     * EspaÃ±a y de varios paÃ­ses americanos.
+     * El DNI es un identificador único obligatorio para todos los ciudadanos de
+     * España y de varios países americanos.
      *
-     *   Formato:   entre 1 y 8 nÃºmeros seguidos de 1 letra
+     *   Formato:   entre 1 y 8 números seguidos de 1 letra
      *   Ejemplos:  12345678Z - 11111111H - 01234567L
      *
-     * Los nÃºmeros se pueden escoger aleatoriamente, pero la letra depende de los
-     * nÃºmeros y por tanto, actÃºa como carÃ¡cter de control. Â¿CÃ³mo se obtiene la
-     * letra a partir de los nÃºmeros?
+     * Los números se pueden escoger aleatoriamente, pero la letra depende de los
+     * números y por tanto, actúa como carácter de control. ¿Cómo se obtiene la
+     * letra a partir de los números?
      *
-     *   1. Obtener el 'mod 23' (resto de la divisiÃ³n entera) del nÃºmero
+     *   1. Obtener el 'mod 23' (resto de la división entera) del número
      *      (e.g.: 12345678 mod 23 = 14).
      *   2. Utilizar la siguiente tabla para elegir la letra que corresponde al
-     *      resultado de la operaciÃ³n anterior.
+     *      resultado de la operación anterior.
      *
      *   +--------+----+----+----+----+----+----+----+----+----+----+----+----+
      *   | mod 23 |  0 |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 |
@@ -379,7 +379,7 @@ class Usuario implements UserInterface
 
         // Comprobar que el formato sea correcto
         if (0 === preg_match("/\d{1,8}[a-z]/i", $dni)) {
-            $context->buildViolation('El DNI introducido no tiene el formato correcto (entre 1 y 8 nÃºmeros seguidos de una letra, sin guiones y sin dejar ningÃºn espacio en blanco)')
+            $context->buildViolation('El DNI introducido no tiene el formato correcto (entre 1 y 8 números seguidos de una letra, sin guiones y sin dejar ningún espacio en blanco)')
                 ->atPath('dni')
                 ->addViolation();
 
@@ -389,15 +389,16 @@ class Usuario implements UserInterface
         // Comprobar que la letra cumple con el algoritmo
         $numero = substr($dni, 0, -1);
         $letra = strtoupper(substr($dni, -1));
-        if ($letra !== substr('TRWAGMYFPDXBNJZSQVHLCKE', strtr($numero, 'XYZ', '012') % 23, 1)) {
-            $context->buildViolation('La letra no coincide con el nÃºmero del DNI. Comprueba que has escrito bien tanto el nÃºmero como la letra')
+        if ($letra !== substr('TRWAGMYFPDXBNJZSQVHLCKE',
+                strtr($numero, 'XYZ', '012') % 23, 1)) {
+            $context->buildViolation('La letra no coincide con el número del DNI. Comprueba que has escrito bien tanto el número como la letra')
                 ->atPath('dni')
                 ->addViolation();
         }
     }
 
     /**
-     * @Assert\IsTrue(message = "Debes tener al menos 18 aÃ±os para registrarte en el sitio")
+     * @Assert\IsTrue(message = "Debes tener al menos 18 años para registrarte en el sitio")
      */
     public function isMayorDeEdad()
     {

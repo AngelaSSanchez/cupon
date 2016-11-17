@@ -12,19 +12,22 @@ class UsuarioType extends AbstractType {
         $builder
                 ->add('nombre')
                 ->add('apellidos')
-                ->add('email', 'email')                
+                ->add('email', 'email')
+                
                 ->add('password', 'repeated', array(
                     'type' => 'password',
                     'invalid_message' => 'Las dos contraseñas deben coincidir',
                     'first_options' => array('label' => 'Contraseña'),
                     'second_options' => array('label' => 'Repite Contraseña'),
-                ))                
+                ))
+                
                 ->add('direccion')
                 ->add('permiteEmail', 'checkbox', array('required' => false) )
                 ->add('fechaNacimiento', 'birthday')
                 ->add('dni')
                 ->add('numeroTarjeta')
-                ->add('ciudad');
+                ->add('ciudad')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver) {
@@ -36,4 +39,5 @@ class UsuarioType extends AbstractType {
     public function getBlockPrefix() {
         return 'usuario';
     }
+
 }
